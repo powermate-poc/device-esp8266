@@ -1,0 +1,23 @@
+image: python:3.9
+
+cache:
+  paths:
+    - ~/.cache/pip
+    - ~/.platformio/.cache
+
+stages:
+  - test
+
+test:
+  stage: test
+  before_script:
+    - pip install -U platformio
+  script:
+    # linting
+    - pio check -e huzzah -v --skip-packages
+    # compile
+    - pio run
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "develop"
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - when: never

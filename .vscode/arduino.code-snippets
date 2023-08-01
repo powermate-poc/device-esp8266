@@ -1,0 +1,9 @@
+{
+    "Serial Println": {
+        "prefix": "print",
+        "body": [
+            "Serial.println($0);"
+        ],
+        "description": "Serial Println Statement"
+    }
+}
